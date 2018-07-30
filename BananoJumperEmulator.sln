@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BananoJumperEmulator", "BananoJumperEmulator\BananoJumperEmulator.csproj", "{94E82DD6-EB72-4728-94D0-3B41EEDDF874}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{78A66471-1B41-4001-A8FD-D75F1E0F0458}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		GlobalSuppressions.cs = GlobalSuppressions.cs
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{94E82DD6-EB72-4728-94D0-3B41EEDDF874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94E82DD6-EB72-4728-94D0-3B41EEDDF874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94E82DD6-EB72-4728-94D0-3B41EEDDF874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94E82DD6-EB72-4728-94D0-3B41EEDDF874}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F30BAE2-0B96-40AD-BDD6-0F461F00E791}
+	EndGlobalSection
+EndGlobal
