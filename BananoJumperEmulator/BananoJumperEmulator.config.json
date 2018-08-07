@@ -1,8 +1,8 @@
 {
   "VerticalRulerFormLocation": "143, 133",
   "VerticalRulerFormSize": "164, 572",
-  "HorizontalRulerFormLocation": "400, 89",
-  "FlightControlFormLocation": "1074, 150",
+  "HorizontalRulerFormLocation": "496, 89",
+  "FlightControlFormLocation": "953, 36",
   "LevelGround": 937.0,
   "LevelPlatform1": 686.0,
   "LevelPlatform2": 460.0,
@@ -11,6 +11,6 @@
   "YLevel1": 529,
   "YLevel2": 409,
   "YLevel3": 289,
-  "XLevel": 476,
+  "XLevel": 572,
   "MonkeyArea": "299, 164, 198, 533"
 }

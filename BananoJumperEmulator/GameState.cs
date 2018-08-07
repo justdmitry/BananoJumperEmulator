@@ -4,6 +4,15 @@
 
     public class GameState
     {
+        private static int counter = 0;
+
+        public GameState()
+        {
+            Id = ++counter;
+        }
+
+        public int Id { get; }
+
         public bool HaveLevel0Danger { get; set; }
 
         public bool HaveLevel1Platform { get; set; }

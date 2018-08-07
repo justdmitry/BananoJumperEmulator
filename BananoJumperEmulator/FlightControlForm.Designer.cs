@@ -53,6 +53,7 @@
             this.YMonkeyLabel = new System.Windows.Forms.Label();
             this.monkeyLevelLabel = new System.Windows.Forms.Label();
             this.jumpLabel = new System.Windows.Forms.Label();
+            this.eventsList = new System.Windows.Forms.ListBox();
             endButton = new System.Windows.Forms.Button();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
@@ -65,12 +66,12 @@
             // 
             // endButton
             // 
-            endButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            endButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             endButton.Location = new System.Drawing.Point(10, 348);
             endButton.Name = "endButton";
             endButton.Size = new System.Drawing.Size(181, 38);
             endButton.TabIndex = 99;
+            endButton.TabStop = false;
             endButton.Text = "End and Close";
             endButton.UseVisualStyleBackColor = true;
             endButton.Click += new System.EventHandler(this.EndButton_Click);
@@ -101,26 +102,26 @@
             // 
             // startButton
             // 
-            this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.startButton.Location = new System.Drawing.Point(10, 259);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(181, 38);
             this.startButton.TabIndex = 3;
+            this.startButton.TabStop = false;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // stopButton
             // 
-            this.stopButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.stopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.stopButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.stopButton.Location = new System.Drawing.Point(10, 303);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(181, 38);
             this.stopButton.TabIndex = 3;
+            this.stopButton.TabStop = false;
             this.stopButton.Text = "Stop";
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
@@ -285,11 +286,24 @@
             this.jumpLabel.Text = "Jump!";
             this.jumpLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // eventsList
+            // 
+            this.eventsList.Font = new System.Drawing.Font("Lucida Console", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.eventsList.FormattingEnabled = true;
+            this.eventsList.IntegralHeight = false;
+            this.eventsList.Items.AddRange(new object[] {
+            ""});
+            this.eventsList.Location = new System.Drawing.Point(197, 11);
+            this.eventsList.Name = "eventsList";
+            this.eventsList.Size = new System.Drawing.Size(191, 374);
+            this.eventsList.TabIndex = 0;
+            // 
             // FlightControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(199, 397);
+            this.ClientSize = new System.Drawing.Size(395, 397);
+            this.Controls.Add(this.eventsList);
             this.Controls.Add(this.jumpLabel);
             this.Controls.Add(label3);
             this.Controls.Add(this.monkeyLevelLabel);
@@ -352,5 +366,6 @@
         private System.Windows.Forms.Label YMonkeyLabel;
         private System.Windows.Forms.Label monkeyLevelLabel;
         private System.Windows.Forms.Label jumpLabel;
+        private System.Windows.Forms.ListBox eventsList;
     }
 }

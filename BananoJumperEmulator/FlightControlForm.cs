@@ -23,6 +23,8 @@
 
         private GameState currentGameState = new GameState();
 
+        private int lastScreenedGameStateId = 0;
+
         private EventWaitHandle level1Processor = new AutoResetEvent(false);
         private EventWaitHandle level1Done = new AutoResetEvent(false);
 
@@ -118,6 +120,11 @@
 
         private void MainTimer_Tick(object sender, EventArgs e)
         {
+            if (lastScreenedGameStateId == currentGameState.Id)
+            {
+                return;
+            }
+
             lock (syncRoot)
             {
                 SuspendLayout();
@@ -134,6 +141,27 @@
                 YMonkeyLabel.ForeColor = currentGameState.MonkeyStable ? Color.DarkGreen : Color.DarkRed;
                 jumpLabel.Visible = currentGameState.Jumped;
                 fpsLabel.Text = currentGameState.FPS.ToString();
+
+                var msg = string.Concat(
+                    currentGameState.HaveLevel0Danger ? "X" : "!",
+                    currentGameState.HaveLevel1Platform ? "X" : "!",
+                    currentGameState.HaveLevel2Platform ? "X" : "!",
+                    currentGameState.HaveLevel3Platform ? "X" : "!",
+                    " ",
+                    currentGameState.MonkeyLevel == -1 ? " " : currentGameState.MonkeyLevel.ToString(),
+                    " ",
+                    currentGameState.MonkeyStable ? "GND" : "AIR",
+                    " ",
+                    currentGameState.Jumped ? "J" : " ");
+                eventsList.Items.Insert(0, msg);
+
+                if (eventsList.Items.Count > 1000)
+                {
+                    eventsList.Items.RemoveAt(1000);
+                }
+
+                lastScreenedGameStateId = currentGameState.Id;
+
                 ResumeLayout();
             }
         }
@@ -160,7 +188,7 @@
                     level2Processor.Set();
                     level3Processor.Set();
 
-                    var level0Area = new Rectangle(state.XLevel, state.YLevel0 - 18, 50, 20);
+                    var level0Area = new Rectangle(state.XLevel - 30, state.YLevel0 - 18, 50, 20);
                     var monkeyArea = GetDesktopImage(state.MonkeyArea);
 
                     currentGameState.Level0Bitmap = GetDesktopImage(level0Area);
@@ -172,6 +200,7 @@
 
                     if (prevGameState.Jumped)
                     {
+                        inputSimulator.Keyboard.Sleep(70);
                         inputSimulator.Keyboard.KeyUp(WindowsInput.Native.VirtualKeyCode.SPACE);
                     }
 
@@ -184,7 +213,7 @@
                     if (currentGameState.Jumped)
                     {
                         inputSimulator.Keyboard.KeyDown(WindowsInput.Native.VirtualKeyCode.SPACE);
-                        inputSimulator.Keyboard.Sleep(10);
+                        inputSimulator.Keyboard.Sleep(30);
                         inputSimulator.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.SPACE);
                     }
 
@@ -366,10 +395,10 @@
 
         private bool Jump(GameState oldState, GameState newState)
         {
-            if (!newState.MonkeyStable)
-            {
-                return false;
-            }
+            //if (!newState.MonkeyStable)
+            //{
+            //    return false;
+            //}
 
             if (newState.MonkeyLevel == 3)
             {
@@ -416,7 +445,7 @@
                 return true;
             }
 
-            if (newState.HaveLevel0Danger)
+            if (newState.HaveLevel0Danger || prevGameState.HaveLevel0Danger)
             {
                 return true;
             }
