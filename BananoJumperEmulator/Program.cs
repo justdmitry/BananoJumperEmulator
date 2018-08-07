@@ -17,7 +17,7 @@
         public static void Main()
         {
             var appPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (appPath.EndsWith("\\bin\\Debug"))
+            if (appPath.EndsWith("\\bin\\Debug") || appPath.EndsWith("\\bin\\Release"))
             {
                 appPath = Path.GetDirectoryName(appPath);
                 appPath = Path.GetDirectoryName(appPath);
@@ -34,7 +34,7 @@
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FlightControlForm());
 
-            var newData = JsonConvert.SerializeObject(State);
+            var newData = JsonConvert.SerializeObject(State, Formatting.Indented);
             File.WriteAllText(configPath, newData);
         }
     }

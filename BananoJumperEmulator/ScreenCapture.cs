@@ -58,7 +58,7 @@
             IntPtr hOld = GDI32.SelectObject(hdcDest, hBitmap);
 
             // bitblt over
-            GDI32.BitBlt(hdcDest, 0, 0, width, height, hdcSrc, 0, 0, GDI32.SRCCOPY);
+            GDI32.BitBlt(hdcDest, 0, 0, width, height, hdcSrc, 0, 0, GDI32.CAPTUREBLT);
 
             // restore selection
             GDI32.SelectObject(hdcDest, hOld);
@@ -116,6 +116,12 @@
         {
             public const int SRCCOPY = 0x00CC0020; // BitBlt dwRop parameter
 
+            /// <summary>
+            /// Capture window as seen on screen.  This includes layered windows
+            /// such as WPF windows with AllowsTransparency="true"
+            /// </summary>
+            public const int CAPTUREBLT = 0x40000000;
+
             [DllImport("gdi32.dll")]
             public static extern bool BitBlt(IntPtr hObject, int nXDest, int nYDest, int nWidth, int nHeight, IntPtr hObjectSource, int nXSrc, int nYSrc, int dwRop);
 
@@ -162,6 +168,20 @@
                 public int top;
                 public int right;
                 public int bottom;
+            }
+        }
+
+        public static void Capt(string path)
+        {
+            var bounds = System.Windows.Forms.Screen.GetBounds(Point.Empty);
+            using (var bmp = new Bitmap(bounds.Width, bounds.Height))
+            {
+                using (var g = Graphics.FromImage(bmp))
+                {
+                    g.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size, CopyPixelOperation.SourceCopy);
+                }
+
+                bmp.Save(path, ImageFormat.Png);
             }
         }
     }

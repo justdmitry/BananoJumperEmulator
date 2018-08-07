@@ -1,6 +1,6 @@
 ﻿namespace BananoJumperEmulator
 {
-    partial class RulerForm
+    partial class VerticalRulerForm
     {
         /// <summary>
         /// Required designer variable.
@@ -116,7 +116,7 @@
             this.positionMenu.Size = new System.Drawing.Size(137, 22);
             this.positionMenu.Text = "Position:";
             // 
-            // RulerForm
+            // VerticalRulerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -125,14 +125,17 @@
             this.ControlBox = false;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "RulerForm";
-            this.Opacity = 0.5D;
+            this.Name = "VerticalRulerForm";
+            this.Opacity = 0.8D;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Main Form";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            this.Load += new System.EventHandler(this.MainForm_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
+            this.Text = "Vertical Ruler";
+            this.TopMost = true;
+            this.Load += new System.EventHandler(this.VerticalRulerForm_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.VerticalRulerForm_Paint);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VerticalRulerForm_MouseDown);
+            this.Move += new System.EventHandler(this.VerticalRulerForm_Move);
+            this.Resize += new System.EventHandler(this.VerticalRulerForm_Resize);
             this.mainContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 

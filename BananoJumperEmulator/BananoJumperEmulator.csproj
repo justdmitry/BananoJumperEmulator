@@ -60,11 +60,18 @@
     <Compile Include="FlightControlForm.Designer.cs">
       <DependentUpon>FlightControlForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="RulerForm.cs">
+    <Compile Include="GameState.cs" />
+    <Compile Include="HorizontalRulerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RulerForm.Designer.cs">
-      <DependentUpon>RulerForm.cs</DependentUpon>
+    <Compile Include="HorizontalRulerForm.Designer.cs">
+      <DependentUpon>HorizontalRulerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VerticalRulerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VerticalRulerForm.Designer.cs">
+      <DependentUpon>VerticalRulerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProgramState.cs" />
@@ -73,8 +80,11 @@
     <EmbeddedResource Include="FlightControlForm.resx">
       <DependentUpon>FlightControlForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RulerForm.resx">
-      <DependentUpon>RulerForm.cs</DependentUpon>
+    <EmbeddedResource Include="HorizontalRulerForm.resx">
+      <DependentUpon>HorizontalRulerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerticalRulerForm.resx">
+      <DependentUpon>VerticalRulerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

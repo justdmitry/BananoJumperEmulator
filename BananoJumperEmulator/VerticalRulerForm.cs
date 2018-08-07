@@ -1,49 +1,62 @@
 ﻿namespace BananoJumperEmulator
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Data;
     using System.Drawing;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
-    using WindowsInput;
-    using WindowsInput.Native;
 
-    public partial class RulerForm : Form
+    public partial class VerticalRulerForm : Form
     {
         private readonly ProgramState state;
 
-        InputSimulator inputSimulator;
+        private float lastLevel;
 
-        float lastLevel;
-
-        public RulerForm()
+        public VerticalRulerForm()
         {
             this.state = Program.State;
             InitializeComponent();
-            inputSimulator = new InputSimulator();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            if (state.FormLocation != null)
-            {
-                this.Location = state.FormLocation.Value;
-            }
+        public event EventHandler RecalcLevels;
 
-            if (state.FormSize != null)
-            {
-                this.Size = state.FormSize.Value;
-            }
+        protected void OnRecalcLevels()
+        {
+            var height = this.ClientSize.Height;
+            var width = this.ClientSize.Width;
+            state.YLevel0 = this.PointToScreen(new Point(0, (int)state.LevelGround * height / 1000)).Y;
+            state.YLevel1 = this.PointToScreen(new Point(0, (int)state.LevelPlatform1 * height / 1000)).Y;
+            state.YLevel2 = this.PointToScreen(new Point(0, (int)state.LevelPlatform2 * height / 1000)).Y;
+            state.YLevel3 = this.PointToScreen(new Point(0, (int)state.LevelPlatform3 * height / 1000)).Y;
+
+            state.MonkeyArea = this.RectangleToScreen(new Rectangle(width, 0, width + 50, height));
+
+            RecalcLevels?.Invoke(this, EventArgs.Empty);
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void VerticalRulerForm_Load(object sender, EventArgs e)
         {
-            state.FormLocation = this.Location;
-            state.FormSize = this.Size;
+            if (state.VerticalRulerFormLocation != null)
+            {
+                this.Location = state.VerticalRulerFormLocation.Value;
+            }
+
+            if (state.VerticalRulerFormSize != null)
+            {
+                this.Size = state.VerticalRulerFormSize.Value;
+            }
+
+            OnRecalcLevels();
+        }
+
+        private void VerticalRulerForm_Move(object sender, EventArgs e)
+        {
+            state.VerticalRulerFormLocation = this.Location;
+            OnRecalcLevels();
+        }
+
+        private void VerticalRulerForm_Resize(object sender, EventArgs e)
+        {
+            state.VerticalRulerFormSize = this.Size;
+            Invalidate();
         }
 
         private float GetCurrentLevel(Point p)
@@ -51,16 +64,13 @@
             return p.Y * 1000 / this.ClientSize.Height;
         }
 
-        private void MainForm_Paint(object sender, PaintEventArgs e)
+        private void VerticalRulerForm_Paint(object sender, PaintEventArgs e)
         {
             var g = this.CreateGraphics();
             var height = this.ClientSize.Height;
             var width = this.ClientSize.Width;
 
             g.Clear(SystemColors.Control);
-
-            var redPen = new Pen(Color.Red, 2);
-            g.DrawRectangle(redPen, new Rectangle(1, 1, width - 2, height - 2));
 
             var groundPen = new Pen(Color.Brown, 2);
             if (state.LevelGround != 0)
@@ -88,9 +98,7 @@
                 g.DrawLine(platformPen, 0, pos, width, pos);
             }
 
-            var scanLinePen = new Pen(Color.Green, 2);
-            var scanPos = 0.5f * width;
-            g.DrawLine(scanLinePen, scanPos, 0, scanPos, height);
+            OnRecalcLevels();
         }
 
         private void NewLevelGroundMenu_Click(object sender, EventArgs e)
@@ -142,7 +150,7 @@
             this.Invalidate();
         }
 
-        private void MainForm_MouseDown(object sender, MouseEventArgs e)
+        private void VerticalRulerForm_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Right)
             {
